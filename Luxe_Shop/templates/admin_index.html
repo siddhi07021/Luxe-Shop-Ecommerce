@@ -1,0 +1,72 @@
+{% extends 'admin_base.html' %}
+
+{% block body %}
+<div id="dashboard" data-aos="fade-up">
+    <div class="mb-5">
+        <span class="badge rounded-pill px-3 py-2 mb-3" style="background: #fce4ec; color: #ac4545; letter-spacing: 1px;">DATABASE LIVE</span>
+        <h1 style="font-family: 'Syne'; font-weight: 800; letter-spacing: -3px; font-size: 4rem;">System <br>Overview<span>.</span></h1>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="card border-0 p-5 shadow-sm" style="border-radius: 40px; background: white;">
+                <h6 class="text-uppercase text-muted small fw-bold mb-4" style="letter-spacing: 2px;">Potential Inventory Value</h6>
+                <div class="d-flex align-items-baseline">
+                    <h2 class="display-2 fw-bold mb-0" style="font-family: 'Syne';">${{ "{:,.2f}".format(total_value) }}</h2>
+                    <span class="ms-3 text-success small fw-bold"><i class="bi bi-graph-up"></i> +12.5%</span>
+                </div>
+                <hr class="my-4 opacity-10">
+                <p class="text-muted mb-0">Calculated from <strong>{{ products|length }}</strong> luxury items in stock.</p>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card border-0 p-5 shadow-sm h-100" style="border-radius: 40px; background: #111; color: white;">
+                <h6 class="text-uppercase text-white-50 small fw-bold mb-4">Orders to Process</h6>
+                <h2 class="display-4 fw-bold mb-4" style="font-family: 'Syne';">{{ orders|length }}</h2>
+                <a href="/admin/order/" class="btn btn-light rounded-pill py-3 fw-bold w-100">Review Sales</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row g-4 mt-2">
+    <div class="col-12">
+        <div class="card border-0 p-5 shadow-sm" style="border-radius: 40px; background: white;">
+            <h6 class="text-uppercase text-muted small fw-bold mb-4" style="letter-spacing: 2px;">Sales Performance</h6>
+            <div style="height: 300px;">
+                <canvas id="salesChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ chart_labels|tojson }},
+            datasets: [{
+                label: 'Revenue',
+                data: {{ chart_values|tojson }},
+                borderColor: '#ac4545', // Your LUXE accent color
+                backgroundColor: 'rgba(172, 69, 69, 0.1)',
+                borderWidth: 3,
+                tension: 0.4, // Smoothing the line
+                pointRadius: 0,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { grid: { display: false }, ticks: { color: '#999' } },
+                y: { grid: { color: '#f0f0f0' }, ticks: { color: '#999' } }
+            }
+        }
+    });
+</script>
+{% endblock %}

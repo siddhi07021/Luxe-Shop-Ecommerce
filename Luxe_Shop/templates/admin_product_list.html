@@ -1,0 +1,77 @@
+{% extends 'admin_base.html' %}
+
+{% block body %}
+<div data-aos="fade-up">
+    <div class="d-flex justify-content-between align-items-end mb-5">
+        <div>
+            <span class="badge rounded-pill px-3 py-2 mb-3" style="background: #fce4ec; color: #ac4545; letter-spacing: 1px;">MASTER INVENTORY</span>
+            <h1 style="font-family: 'Syne'; font-weight: 800; letter-spacing: -3px; font-size: 3.5rem;">Product Suite<span>.</span></h1>
+        </div>
+        <a href="{{ get_url('.create_view', url=return_url) }}" class="btn btn-dark rounded-pill px-4 py-3 fw-bold shadow-sm">
+            <i class="bi bi-plus-lg me-2"></i> Add New Item
+        </a>
+    </div>
+
+    <div class="card border-0 shadow-sm overflow-hidden" style="border-radius: 40px; background: white;">
+        <div class="table-responsive">
+            <table class="table align-middle mb-0">
+                <thead style="background: #fafafa;">
+                    <tr class="text-uppercase small fw-bold" style="letter-spacing: 1px; color: #999;">
+                        <th class="border-0 ps-5 py-4">Preview</th>
+                        <th class="border-0 py-4">Product Details</th>
+                        <th class="border-0 py-4">Category</th>
+                        <th class="border-0 py-4">Price</th>
+                        <th class="border-0 py-4">Stock</th>
+                        <th class="border-0 pe-5 py-4 text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for model in data %}
+                    <tr style="transition: 0.3s;">
+                        <td class="ps-5 py-4">
+                            <img src="{{ model.image_url }}" 
+                                 style="width: 60px; height: 75px; object-fit: cover; border-radius: 12px; border: 1px solid #eee;"
+                                 onerror="this.src='https://via.placeholder.com/60x75'">
+                        </td>
+                        <td>
+                            <span class="fw-bold d-block">{{ model.name }}</span>
+                            <span class="text-muted tiny" style="font-size: 0.75rem;">ID: #{{ model.id }}</span>
+                        </td>
+                        <td>
+                            <span class="badge border rounded-pill px-3 py-2 text-dark fw-normal" style="background: #f8f9fa;">
+                                {{ model.category }}
+                            </span>
+                        </td>
+                        <td class="fw-bold text-accent">${{ "{:,.2f}".format(model.price) }}</td>
+                        <td>
+                            {% if model.stock <= 5 %}
+                                <span class="text-danger fw-bold small"><i class="bi bi-exclamation-circle-fill me-1"></i> Low: {{ model.stock }}</span>
+                            {% else %}
+                                <span class="text-dark small">{{ model.stock }} Units</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-end pe-5">
+                            <div class="btn-group rounded-pill overflow-hidden border">
+                                <a href="{{ get_url('.edit_view', id=model.id, url=return_url) }}" class="btn btn-white btn-sm px-3"><i class="bi bi-pencil"></i></a>
+                                <form class="icon" method="POST" action="{{ get_url('.delete_view') }}" style="display: inline;">
+                                    <input type="hidden" name="id" value="{{ model.id }}">
+                                    <input type="hidden" name="url" value="{{ return_url }}">
+                                    <button onclick="return confirm('Archive this item?')" class="btn btn-white btn-sm px-3 text-danger border-start"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+    .text-accent { color: #ac4545; }
+    tr:hover { background-color: #fcfcfc; }
+    .btn-white { background: white; border: none; }
+    .btn-white:hover { background: #f8f9fa; }
+</style>
+{% endblock %}

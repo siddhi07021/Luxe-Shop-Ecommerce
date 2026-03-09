@@ -1,0 +1,442 @@
+:root {
+    --primary-font: 'Inter', sans-serif;
+    --heading-font: 'Syne', sans-serif;
+    --accent: #ac4545;
+}
+
+body {
+    font-family: var(--primary-font);
+    background-color: #ffffff;
+    overflow-x: hidden;
+}
+
+h1, h2, .navbar-brand {
+    font-family: var(--heading-font);
+}
+
+/* Glassmorphism Navbar */
+.navbar-glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgb(207, 151, 151);
+    padding: 1.2rem 0;
+}
+
+.navbar-brand { font-size: 1.8rem; letter-spacing: -1px; }
+.navbar-brand span { color: var(--accent); }
+
+/* Hero Section */
+.hero-section {
+    height: 90vh;
+    background: radial-gradient(circle at 90% 10%, #fff5f5 0%, #cea4a4 100%);
+}
+
+.bg-soft-pink { background-color: #ffeded; padding: 8px 20px; border-radius: 50px; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; }
+
+/* Bento Cards */
+.category-card {
+    height: 300px;
+    border-radius: 24px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.category-card:hover { transform: scale(0.98); }
+
+.category-card .overlay {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%;
+    padding: 2rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.4));
+    color: rgb(255, 255, 255);
+}
+
+/* Aesthetic Product Cards */
+.product-card-aesthetic {
+    margin-bottom: 2rem;
+    cursor: pointer;
+}
+
+.img-container {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #f1f1f1;
+}
+
+.img-container img {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.product-card-aesthetic:hover img {
+    transform: scale(1.1);
+}
+
+.hover-actions {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: 0.3s ease;
+}
+
+.product-card-aesthetic:hover .hover-actions {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.price-tag { font-size: 0.9rem; letter-spacing: 1px; }
+
+/* Custom Badge */
+.badge-count {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: #000;
+    color: #fff;
+    font-size: 0.6rem;
+    padding: 3px 6px;
+    border-radius: 50%;
+}
+
+.nav-icon { color: #000; font-size: 1.1rem; }
+
+/* Filter Pills */
+.filter-pills span {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 50px;
+}
+.filter-pills span.active { background: #000; color: #fff; }
+/* Smooth transitions for all interactive elements */
+* {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Fix the filter pills visibility */
+.filter-pills {
+    display: flex;
+    gap: 10px;
+    background: #f8f8f8;
+    padding: 5px;
+    border-radius: 50px;
+}
+
+.filter-pills span {
+    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Improve the section spacing */
+.py-5 {
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
+}
+
+/* Modernize the Typography */
+.section-heading {
+    font-size: 2.5rem;
+    letter-spacing: -1.5px;
+    margin-bottom: 0.5rem;
+}
+
+/* Button Hover State */
+.btn-dark:hover {
+    background-color: transparent;
+    color: #000;
+    border: 1px solid #000;
+    transform: translateY(-3px);
+}
+/* Mobile Navbar Styling */
+.navbar-toggler:focus { box-shadow: none; }
+.nav-link {
+    color: #000;
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Luxury Button Hover Effect */
+.btn-dark {
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 1px solid transparent;
+}
+
+.btn-dark:hover {
+    background-color: transparent;
+    color: #000;
+    border-color: #000;
+    transform: translateY(-5px);
+}
+
+/* Product Card Skeleton (Prevents Layout Shift) */
+.img-container {
+    background: #f8f8f8;
+    aspect-ratio: 4/5;
+}
+
+/* Filter Pill Animation */
+.filter-pills span {
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.filter-pills span:hover:not(.active) {
+    border-color: #ddd;
+}
+#productModal .modal-content {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+#productModal img {
+    min-height: 500px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.text-accent {
+    color: var(--accent);
+    font-weight: 600;
+}
+.offcanvas {
+    width: 400px !important; /* Slightly wider for better readability */
+}
+
+.offcanvas-header {
+    background-color: #fff;
+}
+
+.offcanvas-body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Custom Scrollbar for the cart items */
+.offcanvas-body::-webkit-scrollbar {
+    width: 4px;
+}
+.offcanvas-body::-webkit-scrollbar-thumb {
+    background: #eee;
+    border-radius: 10px;
+}
+.newsletter-section .bg-dark {
+    background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.newsletter-section .form-control:focus {
+    background: rgba(255,255,255,0.05);
+    border-color: #fff;
+    box-shadow: none;
+    color: #fff;
+}
+
+.newsletter-section .form-control::placeholder {
+    color: rgba(255,255,255,0.4);
+}
+
+/* Luxury button transition */
+.newsletter-section .btn-light {
+    white-space: nowrap;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.newsletter-section .btn-light:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255,255,255,0.1);
+}
+/* Heart Animation */
+@keyframes heartPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1); }
+}
+
+.animate-heart {
+    animation: heartPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Minimalist Toast Notification */
+.wishlist-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #000;
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    z-index: 9999;
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.wishlist-toast.show {
+    transform: translateX(-50%) translateY(0);
+}
+/* The Shimmer Effect */
+.skeleton {
+    background: #f0f0f0;
+    background: linear-gradient(90deg, #f0f0f0 25%, #f8f8f8 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: skeleton-loading 1.5s infinite;
+    border-radius: 15px;
+}
+
+@keyframes skeleton-loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* Specific Skeleton Shapes */
+.skeleton-img {
+    aspect-ratio: 4/5;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.skeleton-text {
+    height: 12px;
+    margin-bottom: 8px;
+    width: 80%;
+}
+
+.skeleton-text.short {
+    width: 40%;
+}
+/* Custom styling for the card button */
+.product-card-aesthetic .btn-dark {
+    opacity: 0.8;
+    transform: translateY(5px);
+    transition: all 0.3s ease;
+}
+
+.product-card-aesthetic:hover .btn-dark {
+    opacity: 1;
+    transform: translateY(0);
+    background-color: #000;
+}
+/* The "Little Black" Notification Style */
+.wishlist-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #000; /* Black background */
+    color: #fff;       /* White text */
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease, bottom 0.3s ease;
+    pointer-events: none; /* So it doesn't block clicking */
+}
+
+.wishlist-toast.show {
+    opacity: 1;
+    bottom: 50px; /* Moves up slightly when it appears */
+}
+.instagram-link {
+    text-decoration: none; /* Removes the underline */
+    color: #333;           /* Dark grey color */
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    transition: opacity 0.3s ease;
+}
+
+.instagram-link:hover {
+    color: #ac4545;        /* Changes to your accent red on hover */
+    opacity: 0.8;
+}
+
+.handle-text {
+    font-weight: 600;
+    margin-left: 5px;      /* Space between icon and text */
+}
+.social-icon {
+    text-decoration: none;
+    color: #333; /* Dark color to match your minimalist theme */
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.social-icon:hover {
+    color: #ac4545; /* Your accent color */
+    transform: translateY(-3px); /* Lifts the icon slightly on hover */
+}
+/* static/style.css */
+:root {
+    --accent: #ac4545;
+    --dark: #1a1a1a;
+    --light: #f8f9fa;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--light);
+}
+
+.navbar-glass {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.product-card-aesthetic {
+    transition: transform 0.3s ease;
+    background: white;
+    padding: 15px;
+    border-radius: 20px;
+}
+
+.product-card-aesthetic:hover {
+    transform: translateY(-10px);
+}
+
+.img-container img {
+    border-radius: 15px;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+/* Add these to your existing style.css if they are missing */
+.product-card-aesthetic {
+    background: white;
+    padding: 15px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease;
+}
+
+.img-container img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.price-tag {
+    color: #ac4545; /* The LUXE accent color */
+    font-weight: bold;
+}
+.social-icon:hover {
+    color: #ac4545; /* Matches your accent pink/red */
+    transition: 0.3s ease;
+}
